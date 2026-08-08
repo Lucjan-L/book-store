@@ -1,0 +1,26 @@
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  gap: 3px;
+  margin-top: 17px;
+  margin-bottom: 6px;
+}
+
+.form-fields input {
+  padding: 4px 7px;
+}
+
+.form {
+  place-items: center;
+  margin-top: 10px;
+}
+
+.cart-row {
+  display: flex;
+  justify-content: space-between;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 4px 0;
+  border-bottom: 1px solid #707070;
+}

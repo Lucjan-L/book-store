@@ -1,0 +1,18 @@
+.book-header {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.book-header h1 {
+  max-width: 800px;
+  line-height: 50px;
+}
+
+.back-btn {
+  position: absolute;
+  left: 20px;
+  top: 29px;
+  width: 134px;
+  height: 27px;
+}

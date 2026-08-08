@@ -1,0 +1,44 @@
+import { useState } from "react";
+
+export function useCart() {
+  const [cart, setCart] = useState([]);
+
+  function addCartIncreaseQuantity(book) {
+    setCart((prev) => {
+      const existing = prev.find((b) => b.key === book.key);
+
+      if (existing) {
+        return prev.map((b) =>
+          b.key === book.key ? { ...b, quantity: b.quantity + 1 } : b,
+        );
+      }
+
+      return [...prev, { ...book, quantity: 1 }];
+    });
+  }
+
+  function decreaseQuantity(book) {
+    setCart((prev) =>
+      prev
+        .map((b) =>
+          b.key === book.key ? { ...b, quantity: b.quantity - 1 } : b,
+        )
+        // Remove items when their quantity reaches zero
+        .filter((b) => b.quantity > 0),
+    );
+  }
+
+  function removeFromCart(book) {
+    setCart((prev) => {
+      return prev.filter((b) => b.key !== book.key);
+    });
+  }
+
+  return {
+    cart,
+    setCart,
+    addCartIncreaseQuantity,
+    decreaseQuantity,
+    removeFromCart,
+  };
+}
