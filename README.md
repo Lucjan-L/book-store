@@ -2,12 +2,15 @@
 
 A React-based book store application using the Open Library API for book data and Firebase for anonymous authentication and persistent shopping cart storage.
 
+**[Live Demo](https://book-store-lucjan.vercel.app/)**
+
 ## Features
 
 - Search for books using the Open Library API
 - Paginated search results
 - Book details page with author information, descriptions, subjects and publication data
 - Shopping cart with:
+
   - Add and remove books
   - Increase and decrease quantities
   - Automatic total calculation
