@@ -21,7 +21,7 @@ export default function BookDetails() {
         setError(null);
 
         // Fetch the book details using the OpenLibrary work ID from the URL
-        const workRes = await fetch(`/api/works/${id}.json`);
+        const workRes = await fetch(`https://openlibrary.org/works/${id}.json`);
 
         if (!workRes.ok) {
           throw new Error(`HTTP error ${workRes.status}`);
@@ -35,7 +35,9 @@ export default function BookDetails() {
         const authorKey = workData.authors?.[0]?.author?.key;
 
         if (authorKey) {
-          const authorRes = await fetch(`/api${authorKey}.json`);
+          const authorRes = await fetch(
+            `https://openlibrary.org${authorKey}.json`,
+          );
 
           const authorData = await authorRes.json();
 
@@ -55,7 +57,7 @@ export default function BookDetails() {
   if (error) return <p>Error: {error}</p>;
   if (!book) return <p>No book found</p>;
 
-  // OpenLibrary descriptions can be strings or objects and may contain HTML tags, 
+  // OpenLibrary descriptions can be strings or objects and may contain HTML tags,
   // so normalise and clean them before displaying
   const rawDescription =
     typeof book.description === "string"
@@ -106,4 +108,3 @@ export default function BookDetails() {
     </>
   );
 }
-
