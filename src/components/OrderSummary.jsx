@@ -1,20 +1,21 @@
-import { calculateTotal } from "../utils/cartUtils";
+import { calculateTotal } from "../utils/basketUtils";
+import "./OrderSummary.css";
 
-export default function OrderSummary({ cart }) {
-  const total = calculateTotal(cart);
+export default function OrderSummary({ basket }) {
+  const total = calculateTotal(basket);
   return (
-    <div>
+    <div className="order-summary">
       <h3>Order Summary</h3>
       <div className="order-sum">
-        {cart.map((book) => (
-          <div key={book.key} className="cart-row">
+        {basket.map((book) => (
+          <div key={book.key} className="basket-row">
             <span> {book.title} </span>
             <span>
               ({book.quantity}) x £{book.price.toFixed(2)}
             </span>
           </div>
         ))}
-        <h3 className="cart-row">
+        <h3 className="basket-row">
           <span>Total</span> £{total.toFixed(2)}
         </h3>
       </div>

@@ -1,0 +1,53 @@
+.basket-title {
+  color: black;
+  margin-bottom: 30px;
+}
+
+.checkout-btn {
+  color: black;
+  background-color: rgba(255, 255, 0, 0.281);
+  border: none;
+  font-weight: 600;
+  border-radius: 17px;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  border: 1px solid rgb(179, 177, 177, 0.5);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.2;
+  margin-top: 6px;
+  height: 38px;
+  width: 96px;
+}
+
+.checkout-btn {
+  text-decoration: none;
+}
+
+.basket-summary {
+  align-self: flex-end;
+  text-align: right;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.basket-summary p {
+  align-self: flex-end;
+  text-align: left;
+}
+
+.basket-summary button {
+  display: block;
+  margin-top: 10px;
+}
+
+.basket-summary a {
+  text-decoration: none;
+}
+
+.total {
+  color: black;
+}

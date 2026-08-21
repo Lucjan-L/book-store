@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import "./CheckoutForm.css";
 
 export default function CheckoutForm({
   error,
@@ -53,7 +54,9 @@ export default function CheckoutForm({
           onChange={handleChange}
         />
       </div>
-      <button type="submit">Place Order</button>
+      <button className="place-order-btn" type="submit">
+        Place Order
+      </button>
     </form>
   );
 }

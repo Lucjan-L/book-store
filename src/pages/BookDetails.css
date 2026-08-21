@@ -1,3 +1,37 @@
+.bookDetails {
+  background-color: #f4f4f4;
+  color: black;
+  height: 100vh;
+  position: relative;
+}
+
+.bookDetails-content {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.details-width {
+  width: 64%;
+  margin: 0 auto;
+}
+
+.bookDetailsLoading {
+  background-color: #f4f4f4;
+  min-height: 100vh;
+}
+
+.book-title {
+  color: black;
+  height: 120px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.book-subtitle {
+  color: black;
+  margin-bottom: 50px;
+}
+
 .book-header {
   display: flex;
   justify-content: center;
@@ -5,14 +39,6 @@
 }
 
 .book-header h1 {
-  max-width: 800px;
+  max-width: 600px;
   line-height: 50px;
-}
-
-.back-btn {
-  position: absolute;
-  left: 20px;
-  top: 29px;
-  width: 134px;
-  height: 27px;
 }

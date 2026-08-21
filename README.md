@@ -1,6 +1,6 @@
 # Book Store
 
-A React-based book store application using the Open Library API for book data and Firebase for anonymous authentication and persistent shopping cart storage.
+A React-based book store application using the Open Library API for book data and Firebase for anonymous authentication and persistent shopping basket storage.
 
 **[Live Demo](https://book-store-lucjan.vercel.app/)**
 
@@ -9,13 +9,13 @@ A React-based book store application using the Open Library API for book data an
 - Search for books using the Open Library API
 - Paginated search results
 - Book details page with author information, descriptions, subjects and publication data
-- Shopping cart with:
+- Shopping basket with:
 
   - Add and remove books
   - Increase and decrease quantities
   - Automatic total calculation
-  - Persistent cart storage using Firebase Firestore
-- Anonymous Firebase authentication to associate cart data with a user
+  - Persistent basket storage using Firebase Firestore
+- Anonymous Firebase authentication to associate basket data with a user
 - Checkout form and order confirmation flow
 - Search and pagination state preserved across navigation
 - Reusable React components
@@ -33,10 +33,10 @@ A React-based book store application using the Open Library API for book data an
 
 ## Project Structure
 
-- `src/pages` — page-level components such as the book list, cart, checkout and book details
+- `src/pages` — page-level components such as the book list, basket, checkout and book details
 - `src/components` — reusable UI components
 - `src/hooks` — reusable application logic and state management
-- `src/utils` — utility functions such as cart calculations
+- `src/utils` — utility functions such as basket calculations
 - `src/firebase.js` — Firebase configuration and Firestore operations
 - `src/auth.js` — anonymous authentication logic
 

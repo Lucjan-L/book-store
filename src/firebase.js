@@ -23,22 +23,22 @@ const db = getFirestore(app);
 export const auth = getAuth(app);
 
 
-export async function loadCart(uid) {
-  const cartRef = doc(db, "carts", uid);
+export async function loadBasket(uid) {
+  const basketRef = doc(db, "baskets", uid);
 
-  const cartSnap = await getDoc(cartRef);
+  const basketSnap = await getDoc(basketRef);
 
-  if (cartSnap.exists()) {
-    return cartSnap.data().items;
+  if (basketSnap.exists()) {
+    return basketSnap.data().items;
   }
 
   return [];
 }
 
-export async function saveCart(uid, cart) {
-  const cartRef = doc(db, "carts", uid); 
+export async function saveBasket(uid, basket) {
+  const basketRef = doc(db, "baskets", uid); 
 
-  await setDoc(cartRef, {
-    items: cart,
+  await setDoc(basketRef, {
+    items: basket,
   });
 }

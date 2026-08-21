@@ -1,0 +1,36 @@
+.search-form {
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  margin: 1rem auto;
+  max-width: 400px;
+}
+
+.search-input {
+  background-color: white;
+  color: black;
+  font-family: "Roboto", sans-serif;
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-right: none;
+  border-radius: 6px 0 0 6px;
+  outline: none;
+  font-size: 16px;
+}
+
+.search-button {
+  font-family: "Roboto", sans-serif;
+  padding: 10px 16px;
+  border: none;
+  background: #333333e7;
+  color: white;
+  cursor: pointer;
+  border-radius: 0 6px 6px 0;
+  font-size: 16px;
+  transition: background 0.2s ease;
+}
+
+.search-button:hover {
+  background: #555555ec;
+}

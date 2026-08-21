@@ -1,57 +1,57 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, useSearchParams } from "react-router-dom";
 import { initialiseAnonymousAuth } from "./auth";
-import { loadCart, saveCart } from "./firebase.js";
-import { useCart } from "./hooks/useCart";
+import { loadBasket, saveBasket } from "./firebase.js";
+import { useBasket } from "./hooks/useBasket";
 import { useBooks } from "./hooks/useBooks";
+import { Analytics } from "@vercel/analytics/react";
 import BooksList from "./pages/BooksList";
 import BookDetails from "./pages/BookDetails";
-import Cart from "./pages/Cart";
+import Basket from "./pages/Basket";
 import Checkout from "./pages/Checkout";
 import Success from "./pages/Success";
 import Layout from "./components/Layout.jsx";
 import NotFound from "./pages/NotFound";
-import "./App.css";
 
 function App() {
   const [user, setUser] = useState(null);
 
-  // Prevent saving an empty initial cart before Firebase data has loaded
-  const [cartLoaded, setCartLoaded] = useState(false);
+  // Prevent saving an empty initial basket before Firebase data has loaded
+  const [basketLoaded, setBasketLoaded] = useState(false);
 
   const {
-    cart,
-    setCart,
-    addCartIncreaseQuantity,
+    basket,
+    setBasket,
+    addBasketIncreaseQuantity,
     decreaseQuantity,
-    removeFromCart,
-  } = useCart();
+    removeFromBasket,
+  } = useBasket();
 
   useEffect(() => {
     initialiseAnonymousAuth(setUser);
   }, []);
 
   useEffect(() => {
-    async function getCart() {
+    async function getBasket() {
       if (!user) return;
 
       try {
-        const firebaseCart = await loadCart(user.uid);
-        setCart(firebaseCart);
-        setCartLoaded(true);
+        const firebaseBasket = await loadBasket(user.uid);
+        setBasket(firebaseBasket);
+        setBasketLoaded(true);
       } catch (error) {
-        console.error("Failed to load cart:", error);
+        console.error("Failed to load basket:", error);
       }
     }
 
-    getCart();
+    getBasket();
   }, [user]);
 
   useEffect(() => {
-    if (!user || !cartLoaded) return;
+    if (!user || !basketLoaded) return;
 
-    saveCart(user.uid, cart);
-  }, [user, cart, cartLoaded]);
+    saveBasket(user.uid, basket);
+  }, [user, basket, basketLoaded]);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -74,37 +74,46 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout cart={cart} />}>
+        <Route
+          path="/"
+          element={
+            <Layout
+              basket={basket}
+              fetchBooks={fetchBooks}
+              setSearchParams={setSearchParams}
+            />
+          }
+        >
           <Route
             index
             element={
               <BooksList
                 loading={loading}
                 error={error}
-                cart={cart}
+                basket={basket}
                 books={books}
                 query={query}
                 setSearchParams={setSearchParams}
                 currentPage={currentPage}
-                addCartIncreaseQuantity={addCartIncreaseQuantity}
+                addBasketIncreaseQuantity={addBasketIncreaseQuantity}
                 fetchBooks={fetchBooks}
               />
             }
           />
           <Route
-            path="cart"
+            path="basket"
             element={
-              <Cart
-                cart={cart}
-                removeFromCart={removeFromCart}
-                addCartIncreaseQuantity={addCartIncreaseQuantity}
+              <Basket
+                basket={basket}
+                removeFromBasket={removeFromBasket}
+                addBasketIncreaseQuantity={addBasketIncreaseQuantity}
                 decreaseQuantity={decreaseQuantity}
               />
             }
           />
         </Route>
-        <Route path="checkout" element={<Checkout cart={cart} />}></Route>
-        <Route path="success" element={<Success setCart={setCart} />} />
+        <Route path="checkout" element={<Checkout basket={basket} />}></Route>
+        <Route path="success" element={<Success setBasket={setBasket} />} />
         <Route path="book/:id" element={<BookDetails />}></Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

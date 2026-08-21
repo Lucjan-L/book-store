@@ -4,7 +4,7 @@ import OrderSummary from "../components/OrderSummary";
 import CheckoutForm from "../components/CheckoutForm";
 import "./Checkout.css";
 
-export default function Checkout({ cart }) {
+export default function Checkout({ basket }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -12,14 +12,14 @@ export default function Checkout({ cart }) {
   });
   const [error, setError] = useState("");
 
-  if (cart.length === 0) {
-    return <Navigate to="/cart" />;
+  if (basket.length === 0) {
+    return <Navigate to="/basket" />;
   }
 
   return (
     <div>
-      <h1>Checkout</h1>
-      <OrderSummary cart={cart} />
+      <h1 className="checkout-title">Checkout</h1>
+      <OrderSummary basket={basket} />
 
       <CheckoutForm
         error={error}
@@ -30,4 +30,3 @@ export default function Checkout({ cart }) {
     </div>
   );
 }
-

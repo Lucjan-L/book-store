@@ -53,7 +53,12 @@ export default function BookDetails() {
     fetchBookAndAuthor();
   }, [id]);
 
-  if (loading) return <p>Loading book...</p>;
+  if (loading)
+    return (
+      <div className="bookDetailsLoading">
+        <p>Loading book...</p>
+      </div>
+    );
   if (error) return <p>Error: {error}</p>;
   if (!book) return <p>No book found</p>;
 
@@ -69,42 +74,44 @@ export default function BookDetails() {
   const coverId = book.covers?.[0];
 
   return (
-    <>
-      <div className="book-header">
-        <button className="back-btn" onClick={() => navigate(-1)}>
-          ← Back to all books
-        </button>
+    <div className="bookDetails">
+      <div className="bookDetails-content">
+        <div className="book-header">
+          <h1 className="book-title">{book.title}</h1>
+        </div>
+        <div className="details-width">
+          <div>
+            {book.subtitle && (
+              <h2 className="book-subtitle">{book.subtitle}</h2>
+            )}
+            <img
+              src={
+                coverId
+                  ? `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`
+                  : placeholderBook
+              }
+              alt={book.title || "Book cover"}
+            />
+            <h3>Author: {authorName || "Unknown author"}</h3>
+            <p>
+              First Published:{" "}
+              {book.first_publish_date
+                ? book.first_publish_date
+                : "Unknown (Info may be available on home page)"}
+            </p>
+            <br />
 
-        <h1>{book.title}</h1>
+            {cleanedDescription && <p>Description: {cleanedDescription}</p>}
+
+            <br />
+            {book.subjects && (
+              <p>Subjects: {book.subjects.slice(0, 10).join(", ")}</p>
+            )}
+            <br />
+            <h4>Date last modified: {book.last_modified.value}</h4>
+          </div>
+        </div>
       </div>
-      <div>
-        <h2>{book.subtitle}</h2>
-        <img
-          src={
-            coverId
-              ? `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`
-              : placeholderBook
-          }
-          alt={book.title || "Book cover"}
-        />
-        <h3>Author: {authorName || "Unknown author"}</h3>
-        <p>
-          First Published:{" "}
-          {book.first_publish_date
-            ? book.first_publish_date
-            : "Unknown (Info may be available on home page)"}
-        </p>
-        <br />
-
-        {cleanedDescription && <p>Description: {cleanedDescription}</p>}
-
-        <br />
-        {book.subjects && (
-          <p>Subjects: {book.subjects.slice(0, 10).join(", ")}</p>
-        )}
-        <br />
-        <h4>Date last modified: {book.last_modified.value}</h4>
-      </div>
-    </>
+    </div>
   );
 }

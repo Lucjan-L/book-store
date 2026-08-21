@@ -5,8 +5,8 @@ import Pagination from "../components/Pagination";
 import "./BooksList.css";
 
 export default function BookList({
-  cart,
-  addCartIncreaseQuantity,
+  basket,
+  addBasketIncreaseQuantity,
   books,
   query,
   error,
@@ -31,24 +31,25 @@ export default function BookList({
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <>
+    <div className="home-page">
       <SearchBar
         handleSubmit={handleSubmit}
         inputValue={inputValue}
         setInputValue={setInputValue}
+        query={query}
       />
 
       <div className="book-list">
         {books.map((book) => {
-          // Check whether this book is already in the cart so BookCard can display its quantity
-          const item = cart.find((b) => b.key === book.key);
+          // Check whether this book is already in the basket so BookCard can display its quantity
+          const item = basket.find((b) => b.key === book.key);
 
           return (
             <BookCard
               key={book.key}
               book={book}
               item={item}
-              addCartIncreaseQuantity={addCartIncreaseQuantity}
+              addBasketIncreaseQuantity={addBasketIncreaseQuantity}
             />
           );
         })}
@@ -59,6 +60,6 @@ export default function BookList({
         query={query}
         setSearchParams={setSearchParams}
       />
-    </>
+    </div>
   );
 }

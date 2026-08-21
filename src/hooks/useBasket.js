@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-export function useCart() {
-  const [cart, setCart] = useState([]);
+export function useBasket() {
+  const [basket, setBasket] = useState([]);
 
-  function addCartIncreaseQuantity(book) {
-    setCart((prev) => {
+  function addBasketIncreaseQuantity(book) {
+    setBasket((prev) => {
       const existing = prev.find((b) => b.key === book.key);
 
       if (existing) {
@@ -18,7 +18,7 @@ export function useCart() {
   }
 
   function decreaseQuantity(book) {
-    setCart((prev) =>
+    setBasket((prev) =>
       prev
         .map((b) =>
           b.key === book.key ? { ...b, quantity: b.quantity - 1 } : b,
@@ -28,17 +28,17 @@ export function useCart() {
     );
   }
 
-  function removeFromCart(book) {
-    setCart((prev) => {
+  function removeFromBasket(book) {
+    setBasket((prev) => {
       return prev.filter((b) => b.key !== book.key);
     });
   }
 
   return {
-    cart,
-    setCart,
-    addCartIncreaseQuantity,
+    basket,
+    setBasket,
+    addBasketIncreaseQuantity,
     decreaseQuantity,
-    removeFromCart,
+    removeFromBasket,
   };
 }
