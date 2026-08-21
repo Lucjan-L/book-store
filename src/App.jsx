@@ -73,6 +73,8 @@ function App() {
 
   return (
     <>
+      <Analytics />
+
       <Routes>
         <Route
           path="/"
